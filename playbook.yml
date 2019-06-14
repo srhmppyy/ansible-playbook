@@ -1,0 +1,13 @@
+---
+- hosts: target_machine
+  tasks:
+    - name: Create folder using Shell Module
+      file:
+        path: /samplefolder/
+        state: directory
+
+        #  - name: Create folder using File Module
+        #file:
+        #state: directory
+        #path: "~/filemodulefolder"
+
