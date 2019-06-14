@@ -1,0 +1,17 @@
+- name: Create files using loop
+  file:
+    path: /tmp/samplefolderusingshellmodule/{{ item }}
+    state: touch
+  with_items:
+    - file1
+    - file2
+    - file3
+
+- name: Create file using loop with multiple sub keys
+  file:
+    path: /tmp/samplefolderusingshellmodule/{{ item.filename }}.{{ item.extension }}
+    state: touch
+  with_items:
+    - { filename: "samplefile", extension: xml" }
+    - { filename: "samplefile2", extension: html" }
+    - { filename: "samplefile3", extension: sh" }

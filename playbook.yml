@@ -1,41 +1,7 @@
 ---
 - hosts: target-machine
-  tasks:
-    - name: Create folder
-      file:
-        path: /tmp/samplefolder/
-        state: directory
-
-    - name: Check if samplefolderusingshellmodule exists
-      stat:
-        path: /tmp/samplefolderusingshellmodule
-      register: output
-
-    - name: Check output
-      debug:
-        var: output
-
-    - name: Create folder using shell module
-      shell: "mkdir /tmp/samplefolderusingshellmodule"
-      when: output.stat.exists != true
-
-    - name: Create files using loop
-      file:
-        path: /tmp/samplefolderusingshellmodule/{{ item }}
-        state: touch
-      with_items:
-        - file1
-        - file2
-        - file3
-
-    - name: Create file using loop with multiple sub keys
-      file:
-        path: /tmp/samplefolderusingshellmodule/{{ item.filename }}.{{ item.extension }}
-        state: touch
-      with_items:
-        - { filename: "samplefile", extension: xml" }
-        - { filename: "samplefile2", extension: html" }
-        - { filename: "samplefile3", extension: sh" }
-
+  roles:
+    - { role: create_folder_role, tags: ["create_folder"] }
+    - { role: create_files_role, tags: ["create_files"] }
 
 
